@@ -1,0 +1,42 @@
+---
+filename: interesting_files.yaml
+enabled: true
+meta:
+  name: Interesting Potentially Sensitive Files
+  author: PaperMtn
+  date: '2020-08-14'
+  description: Detects other misc potentially sensitive files that have been exposed.
+    Pattern left blank to return every hit
+  severity: '70'
+scope:
+- code
+test_cases:
+  match_cases:
+  - blank
+  fail_cases:
+  - blank
+strings:
+- "BEGIN CERTIFICATE in:file extension:openvpn"
+- "BEGIN CERTIFICATE in:file extension:ovpn"
+- "ServiceConfiguration in:file extension:cscfg"
+- "ServiceConfiguration in:file extension:csdef"
+- "<key>ConnectionString</key> in:file extension:rdp"
+- "private in:file extension:jks"
+- "password in:file extension:.psafe3"
+- "password in:file extension:agilekeychain"
+- "password in:file extension:keychain"
+- "private in:file extension:kwallet"
+- "private in:file extension:tblk"
+- "filename:otr.private_key"
+- "filename:secret_token.rb"
+- "filename:publish_over_ssh.BapSshPublisherPlugin.xml"
+- "filename:credentials.xml"
+- "filename:knife.rb"
+- "filename:filezilla.xml"
+- "filename:terraform.tfvars"
+- "private in:file extension:tfvars"
+- "user in:file extension:htpasswd"
+- "user in:file extension:trc"
+- "private in:file extension:ssh"
+- "filename:.chef/*.pem"
+pattern: ''
