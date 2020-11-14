@@ -7,6 +7,8 @@ import time
 import requests
 import yaml
 from requests.exceptions import HTTPError
+from requests.packages.urllib3.util import Retry
+from requests.adapters import HTTPAdapter
 
 import github_watchman.config as cfg
 import github_watchman.logger as logger
@@ -19,7 +21,7 @@ class GitHubAPIClient(object):
         self.base_url = base_url.rstrip('\\')
         self.per_page = 100
         self.session = session = requests.session()
-        session.mount(self.base_url, requests.adapters.HTTPAdapter())
+        session.mount(self.base_url, HTTPAdapter(max_retries=Retry(connect=3, backoff_factor=1)))
         session.headers.update({
             'Authorization': 'token {}'.format(self.token),
             'Accept': 'application/vnd.github.v3.text-match+json'
